@@ -13,10 +13,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 from oscar import OSCAR_MAIN_TEMPLATE_DIR
 from oscar import get_core_apps
+from oscar.defaults import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -29,7 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+OSCAR_SHOP_NAME = "Aqui Sopas"
+OSCAR_DEFAULT_CURRENCY = "LPS"
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,9 +43,24 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'widget_tweaks'
+]
+INSTALLED_APPS = INSTALLED_APPS + get_core_apps(['shipping',])
 
-] + get_core_apps()
+MEDIA_URL = '/media/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR,'staticos')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,'static'),
+    os.path.join(BASE_DIR,'statics'),
+)
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

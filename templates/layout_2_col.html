@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block banner %}{% endblock %}
+{% block content_wrapper %}
+  {% block breadcrumbs %}{% endblock %}
+  <main>
+    <section class="block menu-page-block">
+      <div class="container">
+        {% block toolbar %}{% endblock %}
+        {% block column_left  %}{% endblock %}
+        {% block content %}{% endblock %}
+      </div>
+    </section>
+  </main>
+{% endblock %}

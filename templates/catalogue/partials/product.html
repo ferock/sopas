@@ -1,0 +1,51 @@
+{% load reviews_tags %}
+{% load thumbnail %}
+{% load i18n %}
+{% load display_tags %}
+{% load staticfiles %}
+
+{% block product %}
+      <div class=" menu-item-wrap">
+        {% block product_image %}
+            <figure>
+                {% with image=product.primary_image %}
+                    {% thumbnail image.original "x270" upscale=False as thumb %}
+                    <a href="{{ product.get_absolute_url }}">
+                      <img src="{{ thumb.url }}" alt="{{ product.get_title }}" class="img-responsive">
+                    </a>
+                    {% endthumbnail %}
+                {% endwith %}
+            </figure>
+        {% endblock %}
+        <div class="mid">
+            <h4><a href="#">{{ product.get_title }}</a></h4>
+            <span>desc</span>
+            <div class="facts-table">
+              {% block product_review %}
+                  {% iffeature "reviews" %}
+                      <p class="star-rating {{ product.rating|as_stars }}">
+                          <i class="icon-star"></i>
+                          <i class="icon-star"></i>
+                          <i class="icon-star"></i>
+                          <i class="icon-star"></i>
+                          <i class="icon-star"></i>
+                      </p>
+                  {% endiffeature %}
+              {% endblock %}
+            </div>
+        </div>
+
+
+
+        {% block product_title %}
+            <!--<h3><a href="{{ product.get_absolute_url }}" title="{{ product.get_title }}">{{ product.get_title|truncatewords:4 }}</a></h3>-->
+        {% endblock %}
+        <div class="right">
+            {% include "catalogue/partials/stock_record.html" %}{% block product_price %}
+            {% if not product.is_parent %}
+                {% include "catalogue/partials/add_to_basket_form_compact.html" %}
+            {% endif %}
+        </div>
+      </div>
+      {% endblock %}
+{% endblock %}

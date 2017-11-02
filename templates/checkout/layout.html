@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% load i18n %}
+{% load promotion_tags %}
+{% load category_tags %}
+
+{% block layout %}
+<div class="wrapper">
+    <header>
+      <div class="container">
+        <div class="row">
+            <!-- ============== Left logo block starts ============== -->
+            <div class="col-xs-12 col-sm-3 logo-block">
+              {% include "partials/brand.html" %}
+            </div>
+            <!-- ============== Left logo block ends ============== -->
+
+            <!-- ============== Main navigation starts ============== -->
+            <div class="col-xs-12 col-sm-7 menu-block">
+              {% block navigation %}
+                  {% include "partials/nav_primary.html" %}
+              {% endblock %}
+
+            </div>
+
+            <div class="col-xs-12 col-sm-2 nav-cart ">
+              {# Mini-basket wrapped in a block so some templates can now display it #}
+              {% block mini_basket %}{% include "partials/mini_basket.html" %}{% endblock %}
+            </div>
+            <!-- ============== Main navigation ends ============== -->
+        </div>
+      </div>
+    </header><!-- /header -->
+
+
+            {% include 'partials/alert_messages.html' %}
+
+            <!--<div class="sub-header">
+                <h1>{% block checkout_title %}{% endblock %}</h1>
+            </div>-->
+
+            <!-- The main nav on checkout pages contain links to modal flatpages -->
+            {% block modal %}
+                {% load flatpages %}
+                {% get_flatpages '/order/' as flatpages %}
+                {% for page in flatpages %}
+                <div id="{{ page.title|slugify }}" class="modal hide fade">
+                    <div class="modal-header">
+                        <a class="close" data-dismiss="modal">×</a>
+                        <h3>{{ page.title }}</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="large-content">
+                            {{ page.content|safe }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endblock %}
+            <main>
+              {% block checkout_nav %}{% endblock %}
+              <div class="container">
+                <div class=" block">
+                  {% block content %}{% endblock %}
+                </div>
+              </div>
+            </main>
+            <div id="promotions">
+                {% for promotion in promotions_page %}
+                    {% render_promotion promotion %}
+                {% endfor %}
+            </div>
+        <!-- /page_inner -->
+
+    {% include "partials/footer_checkout.html" %}
+  </div>
+{% endblock %}

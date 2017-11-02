@@ -1,0 +1,199 @@
+{% extends "layout_2_col.html" %}
+
+{% load basket_tags %}
+{% load promotion_tags %}
+{% load category_tags %}
+{% load product_tags %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block title %}
+    {% if summary %}{{ summary }} |{% endif %} {{ block.super }}
+{% endblock %}
+
+{% block body_class %}menu-page{% endblock %}
+
+
+{% block banner %}
+<section class="banner banner-image menu-page-banner">
+    <div class="bannerwrap">
+        <figure><img src={% static "images/blog-banner-main.jpg" %} alt="Menu page banner" /></figure>
+        <div class="banner-text text-center">
+            <h1 class="text-uppercase"><strong>OUR DELICIOUS MENU</strong></h1>
+            <p class="text-sp text-lt">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block main %}
+  <section class="block menu-page-block">
+      <div class="container">
+        {% block toolbar %}
+        <div class="tool-bar wow fadeInUp" style="display:none">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    <fieldset>
+                        <label>Sort By:</label>
+                        <select class="cat">
+                            <option value="Best Sellers"> Best Sellers</option>
+                        </select>
+                    </fieldset>
+
+                    <fieldset>
+                        <label>Sort By:</label>
+                        <select class="num">
+                            <option value="12"> 12 </option>
+                        </select>
+                    </fieldset>
+
+                    <div class="action-btn-wrap text-right pull-right">
+                       <a href="menu-grid.html" class="btn hvr-wobble-top"><i class="fa fa-th"></i></a>
+                       <a href="menu-list.html" class="btn hvr-wobble-top active"><i class="fa fa-list-ul"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+        <div class="row">
+          {% block column_left  %}
+          <div class="col-xs-12 col-sm-3 menu-left-sidebar">
+            <!-- search -->
+            <div class="search-section menu-sidebox-wrap wow fadeInLeft">
+                <form>
+                    <fieldset><input type="text" placeholder="Search something"></fieldset>
+                </form>
+            </div>
+            <!--search ends-->
+            <!--category- list-->
+            <div class="menu-sidebox-wrap wow fadeInLeft">
+                <h6 class="title text-sp text-lt">Menu Categories</h6>
+                <ul class="side-cat-list">
+                   <li><a href="#">All Categories</a></li>
+                   <li><a href="#" class="active">Soup & Salads</a></li>
+                   <li><a href="#">Enchiladas</a></li>
+                   <li><a href="#">Fajita Grill</a></li>
+                   <li><a href="#">Fajita Grill</a></li>
+                   <li><a href="#">Border Bowls</a></li>
+                   <li><a href="#">Lunch</a></li>
+                   <li><a href="#">Desserts</a></li>
+                </ul>
+            </div>
+            <!--category list ends-->
+            <!-- calories range -->
+              <div class="menu-sidebox-wrap wow fadeInLeft">
+
+                  <h6 class="title text-sp text-lt">Filter by Calories</h6>
+                  <div class="calories-range">
+
+                      <div id="slider-range"></div>
+                      <div class="range-wrap text-sp">
+                          <table>
+                              <tr>
+                                  <td>Calories :</td>
+                                  <td><input type="text" id="amount"></td>
+                              </tr>
+                          </table>
+                      </div>
+                  </div>
+
+              </div>
+            <!-- calories range ends -->
+            <div class="menu-sidebox-wrap seller-list wow fadeInLeft">
+                <h6 class="title text-sp text-lt">Best Sellers</h6>
+                <ul>
+                    <li>
+                        <figure><a href="#"> <img src="images/best-seller1.jpg" alt=" Best seller image"></a></figure>
+
+                        <h6><a href="#">Porridge with Green Kiwi</a></h6>
+                        <h6 class="price">$15</h6>
+                    </li>
+
+                    <li>
+                        <figure><a href="#"> <img src="images/best-seller2.jpg" alt=" Best seller image"></a></figure>
+
+                        <h6><a href="#">Baked Fresh Salmon</a></h6>
+                        <h6 class="price">$15</h6>
+                    </li>
+
+                    <li>
+                        <figure><a href="#"> <img src="images/best-seller3.jpg" alt=" Best seller image"></a></figure>
+
+                        <h6><a href="#">Fresh Vegetable Salad</a></h6>
+                        <h6 class="price">$15</h6>
+                    </li>
+
+                    <li>
+                        <figure><a href="#"> <img src="images/best-seller4.jpg" alt=" Best seller image"></a></figure>
+
+                        <h6><a href="#">Baked Fresh Salmon</a></h6>
+                        <h6 class="price">$15</h6>
+                    </li>
+                </ul>
+            </div>
+            <!-- Ingredient tags -->
+              <div class="menu-sidebox-wrap ingredient-tags wow fadeInLeft">
+                  <h6 class="title text-sp text-lt">Ingredient Tags</h6>
+                  <ul>
+                      <li><a href="#" class="hvr-wobble-top"> ORGANIC </a></li>
+                      <li><a href="#" class="hvr-wobble-top"> VEGAN </a></li>
+                      <li><a href="#" class="hvr-wobble-top"> GLUTTEN-FREE </a></li>
+                      <li><a href="#" class="hvr-wobble-top"> FRESH-SALMON </a></li>
+                      <li><a href="#" class="hvr-wobble-top"> VEGETABLE </a></li>
+                      <li><a href="#" class="hvr-wobble-top"> PORRIDGE </a></li>
+                      <li><a href="#" class="hvr-wobble-top"> GLUTTEN-FREE </a></li>
+                      <li><a href="#" class="hvr-wobble-top"> FRESH-SALMON </a></li>
+                  </ul>
+              </div>
+            <!-- Ingredient ends -->
+          </div>
+          {% endblock %}
+          {% block content  %}
+          <div class="col-xs-12 col-sm-9">
+            {% if products %}
+            <div class="row menu-listing-wrap list-view">
+              {% for product in products %}
+                  <div class="col-xs-12 col-sm-12 menu-item wow fadeInLeft">{% render_product product %}</div>
+              {% endfor %}
+              {% include "partials/pagination.html" %}
+            </div>
+            {% else %}
+            <div class="row menu-listing-wrap list-view">
+              <p class="nonefound">{% trans "No products found." %}</p>
+            </div>
+            {% endif %}
+            <form method="get" class="form-horizontal">
+              {% for value in selected_facets %}
+                  <input type="hidden" name="selected_facets" value="{{ value }}" />
+              {% endfor %}
+              <input type="hidden" name="q" value="{{ search_form.q.value|default_if_none:"" }}" />
+              {% if paginator.count %}
+                 {% if paginator.num_pages > 1 %}
+                     {% blocktrans with start=page_obj.start_index end=page_obj.end_index count num_results=paginator.count %}
+                         <strong>{{ num_results }}</strong> result - showing <strong>{{ start }}</strong> to <strong>{{ end }}</strong>.
+                     {% plural %}
+                         <strong>{{ num_results }}</strong> results - showing <strong>{{ start }}</strong> to <strong>{{ end }}</strong>.
+                     {% endblocktrans %}
+                 {% else %}
+                     {% blocktrans count num_results=paginator.count %}
+                         <strong>{{ num_results }}</strong> result.
+                     {% plural %}
+                         <strong>{{ num_results }}</strong> results.
+                     {% endblocktrans %}
+                 {% endif %}
+                 {% if form %}
+                     <div class="pull-right">
+                         {% include "partials/form_field.html" with field=form.sort_by %}
+                     </div>
+                 {% endif %}
+             {% else %}
+                 <p>
+                     {% trans "<strong>0</strong> results." %}
+                 </p>
+             {% endif %}
+            </form>
+          </div>
+          {% endblock %}
+        </div>
+    </div>
+  </section>
+{% endblock %}
