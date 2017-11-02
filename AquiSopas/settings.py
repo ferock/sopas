@@ -27,7 +27,7 @@ SECRET_KEY = ')czg)ebcc0s18&@*-*xdr64hq6%t4(yo=5b23kahbm0*kn+9)k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 OSCAR_SHOP_NAME = "Aqui Sopas"
 OSCAR_DEFAULT_CURRENCY = "LPS"
