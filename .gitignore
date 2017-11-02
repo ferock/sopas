@@ -1,3 +1,4 @@
 *pycache*
-cache
+/cache/
 *__pycache*
+*.pyc
