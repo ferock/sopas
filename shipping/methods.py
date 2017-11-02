@@ -3,7 +3,6 @@ from oscar.apps.shipping import methods
 from oscar.core import prices
 
 
-help(AbstractOrderAndItemCharges)
 class FleteDefault(AbstractOrderAndItemCharges):
     code = 'flete1'
     name = 'Flete'
