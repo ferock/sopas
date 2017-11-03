@@ -105,14 +105,24 @@ SITE_ID = 1
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if not os.getenv('HAS_DB'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.getenv('DATABASE_NAME','appdb'),
+            'USER': os.getenv('DATABASE_USER','default'),
+            'PASSWORD': os.getenv('DATABASE_PASSWD','password'),
+            'HOST': os.getenv('MYSQL_SERVICE_HOST','localhost'),
+            'PORT': os.getenv('MYSQL_SERVICE_PORT','3306')
+        }
     }
-}
-
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -160,5 +170,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
-STATIC_URL = '/static/'
+if not os.getenv('HAS_DB'):
+    STATIC_URL = 'https://storage.googleapis.com/bdeliveryonline/'
+else:
+    STATIC_URL = '/static/'
