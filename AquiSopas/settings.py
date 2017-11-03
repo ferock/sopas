@@ -46,10 +46,12 @@ INSTALLED_APPS = [
 ]
 INSTALLED_APPS = INSTALLED_APPS + get_core_apps(['shipping',])
 
-MEDIA_URL = '/media/'
+if not os.getenv('HAS_DB'):
+    MEDIA_URL = 'https://storage.googleapis.com/bdelivery/media/'
+else:
+    MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -171,6 +173,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 if not os.getenv('HAS_DB'):
-    STATIC_URL = 'https://storage.googleapis.com/bdeliveryonline/'
+    STATIC_URL = 'https://storage.googleapis.com/bdelivery/static/'
 else:
     STATIC_URL = '/static/'
