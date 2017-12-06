@@ -25,13 +25,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ')czg)ebcc0s18&@*-*xdr64hq6%t4(yo=5b23kahbm0*kn+9)k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+COMPRESS_ENABLED = True
+
+COMPRESS_OFFLINE = True
+
+COMPRESS_CSS_FILTERS = ["compressor.filters.cssmin.CSSMinFilter"]
+
+COMPRESS_JS_FILTERS = ["compressor.filters.jsmin.JSMinFilter"]
+
+OSCAR_USE_LESS = False
 
 ALLOWED_HOSTS = ['*']
 
 OSCAR_SHOP_NAME = "Aqui Sopas"
-OSCAR_DEFAULT_CURRENCY = "LPS"
-# Application definition
+OSCAR_DEFAULT_CURRENCY = "L "
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -42,26 +51,28 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'widget_tweaks'
+    'widget_tweaks',
+    'storages',
+    'paybac',
+    'anymail',
+    'compressor'
 ]
-INSTALLED_APPS = INSTALLED_APPS + get_core_apps(['shipping',])
+INSTALLED_APPS = INSTALLED_APPS + get_core_apps(['shipping','checkout'])
 
-if not os.getenv('HAS_DB'):
-    MEDIA_URL = 'https://storage.googleapis.com/bdelivery/media/'
-else:
-    MEDIA_URL = '/media/'
+OSCAR_ALLOW_ANON_CHECKOUT = True
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+OSCAR_REQUIRED_ADDRESS_FIELDS = ['first_name','line1','city','phone_number']
+
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR,'staticos')
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'static'),
-    os.path.join(BASE_DIR,'statics'),
+    os.path.join(BASE_DIR,'template_statics'),
 )
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,6 +84,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'oscar.apps.basket.middleware.BasketMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'AquiSopas.urls'
@@ -159,7 +171,7 @@ HAYSTACK_CONNECTIONS = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es_MX'
 
 TIME_ZONE = 'UTC'
 
@@ -176,3 +188,40 @@ if not os.getenv('HAS_DB'):
     STATIC_URL = 'https://storage.googleapis.com/bdelivery/static/'
 else:
     STATIC_URL = '/static/'
+    #STATIC_URL = '/static/'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+
+GS_BUCKET_NAME = "bdelivery"
+
+MEDIA_ROOT = os.path.join("/var/www",'media')
+
+if not os.getenv('HAS_DB'):
+    MEDIA_URL = 'https://storage.googleapis.com/bdelivery/cache/'
+else:
+    MEDIA_URL = '/media/'
+
+OSCAR_HOMEPAGE = reverse_lazy("catalogue:index")
+
+OSCAR_PRODUCTS_PER_PAGE = 14
+
+OSCAR_HIDDEN_FEATURES = [
+    'wishlists',
+    'reviews'
+]
+
+OSCAR_GOOGLE_ANALYTICS_ID = "UA-110543293-1"
+
+# EMAIL CONFIGURATION
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+
+ANYMAIL = {
+    "MAILGUN_API_KEY": "key-2627cb8e57c0efb4f85eaa918870517d",
+    "MAILGUN_SENDER_DOMAIN": 'sac.aquisopas.com',  # your Mailgun domain, if needed
+}
+
+OSCAR_FROM_EMAIL = "web@aquisopas.com"
+
+DEFAULT_FROM_EMAIL = "web@sac.aquisopas.com"  # if you don't already have this in settings
+
+EMAIL_SUBJECT_PREFIX = "Orden Electronica"

@@ -16,11 +16,15 @@ Including another URLconfw
 from django.conf.urls import url,include
 from django.conf.urls.static import static
 from django.contrib import admin
-from oscar.app import application
+from .app import application
 from django.conf import settings
+from paybac.views import *
 
 urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^admin/', admin.site.urls),
+    url(r'^redirect/', RedirectView.as_view(), name='gocardless-redirect'),
+    url(r'^confirm/', ConfirmView.as_view(), name='gocardless-response'),
+    url(r'^cancel/', CancelView.as_view(), name='gocardless-cancel'),
     url(r'', include(application.urls)),
 ] +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
