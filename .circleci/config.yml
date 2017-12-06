@@ -3,12 +3,12 @@ jobs:
   build:
     docker:
       - image: gcr.io/google_appengine/python
-        enviroment:
+        environment:
           DATABASE_NAME: "appdb"
           DATABASE_USER: "appuser"
           DATABASE_PASSWD: "apppw"
       - image: mysql
-        enviroment:
+        environment:
           MYSQL_DATABASE: "appdb"
           MYSQL_USER: "appuser"
           MYSQL_PASSWORD: "apppw"
@@ -18,14 +18,14 @@ jobs:
       - run:
           name: Install Python deps in a venv
           command: |
-            python -m venv venv
-            . venv/bin/activate
+            python  virtualenv env
+            . env/bin/activate
             pip install -r requirements.txt
       - run:
           command: apt-get install libmysqlclient-dev
       - run:
           command: |
-            . venv/bin/activate
+            . env/bin/activate
             python manage.py test
       - store_artifacts:
           path: test-reports/
