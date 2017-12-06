@@ -26,9 +26,9 @@
     {% block basket_form_headers %}
         <div class="basket-title hidden-xs">
             <div class="row">
-                <h2 class="col-sm-6 h3 product-name">{% trans "Products" %}</h2>
+                <h2 class="col-sm-5 h3 product-name">{% trans "Products" %}</h2>
                 <p class="col-sm-3 h3 product-quantity">{% trans "Quantity" %}</p>
-                <p class="col-sm-1 h3 align-right product-price">{% trans "Price" %}</p>
+                <p class="col-sm-2 h3 align-right product-price">{% trans "Price" %}</p>
                 <p class="col-sm-2 h3 align-right product-subtotal">{% trans "Total" %}</p>
             </div>
         </div>
@@ -54,7 +54,7 @@
                                     {% endthumbnail %}
                                 {% endwith %}
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <h3><a href="{{ product.get_absolute_url }}">{{ line.description }}</a></h3>
                                 <p class="availability {{ session.availability.code }}">{{ session.availability.message }}</p>
                             </div>
@@ -62,15 +62,15 @@
                                 <div class="checkout-quantity">
                                     <div class="input-group  {% if form.errors %}error{% endif %}">
                                         {% render_field form.quantity class+="form-control" %}
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="submit" data-loading-text="{% trans 'Updating...' %}">{% trans "Update" %}</button>
-                                    </span>
+                                      <span class="input-group-btn">
+                                          <button class="btn btn-primary" type="submit" data-loading-text="{% trans 'Updating...' %}">{% trans "Update" %}</button>
+                                      </span>
                                     </div>
                                 </div>
                                     <div>
                                         <a href="#" data-id="{{ forloop.counter0 }}" data-behaviours="remove" class="inline">{% trans "Remove" %}</a>
                                         {% if user.is_authenticated %}
-                                            | <a href="#" data-id="{{ forloop.counter0 }}" data-behaviours="save" class="inline">{% trans "Save for later" %}</a>
+                                            <!--| <a href="#" data-id="{{ forloop.counter0 }}" data-behaviours="save" class="inline">{% trans "Save for later" %}</a>-->
                                         {% endif %}
                                         <div style="display:none">
                                             {{ form.save_for_later }}
@@ -85,11 +85,11 @@
                                     </div>
 
                             </div>
-                            <div class="col-sm-1">
+                            <div class="col-sm-2">
                                 {% if not line.unit_price_incl_tax and not line.unit_tax_excl_tax %}
                                     <p class="align-right">&mdash;</p>
                                 {% else %}
-                                    <p class="price_color align-right">
+                                    <p class="price_color align-right" style="">
                                         {% if line.is_tax_known %}
                                             {{ line.unit_price_incl_tax|currency:line.price_currency }}
                                         {% else %}
@@ -102,7 +102,7 @@
                                 {% if not line.line_price_incl_tax and not line_price_excl_tax %}
                                     <p class="align-right">&mdash;</p>
                                 {% else %}
-                                    <p class="price_color align-right">
+                                    <p class="price_color align-right" style="color:black">
                                         {% if line.is_tax_known %}
                                             {{ line.line_price_incl_tax|currency:line.price_currency }}
                                         {% else %}
@@ -123,7 +123,7 @@
             {# Hide the entire section if a custom BasketView doesn't pass in a voucher form #}
             {% if voucher_form %}
                 <div class="col-sm-6">
-                    <div class="sub-header">
+                    <!--<div class="sub-header">
                         <h2>{% trans "Voucher/promo code" %}</h2>
                     </div>
                     <p id="voucher_form_link"><a href="#voucher" class="btn btn-default btn-full">{% trans "I have a voucher code..." %}</a></p>
@@ -135,7 +135,7 @@
                             <button type="submit" class="btn btn-info" data-loading-text="{% trans 'Adding...' %}">{% trans "Add voucher" %}</button>
                             {% trans "or" %} <a href="#" id="voucher_form_cancel">{% trans "cancel" %}</a>
                         </form>
-                    </div>
+                    </div>-->
                 </div>
             {% endif %}
         {% endblock vouchers %}

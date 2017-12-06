@@ -1,5 +1,6 @@
+{% load staticfiles %}
 <figure>
   <a href="{{ homepage_url }}">
-    <img class="img-responsive" src="images/madang-logo.png" alt="{{ shop_name }}" />
+    <img class="img-responsive" src={% static "images/logo.png" %} alt="{{ shop_name }}" />
   </a>
 </figure>

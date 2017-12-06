@@ -1,0 +1,35 @@
+{% extends 'oscar/checkout/preview.html' %}
+{% load currency_filters %}
+{% load i18n %}
+
+{% block payment_method %}
+<div class="span6">
+    <div class="sub-header">
+        <h2>{% trans "Payment" %}</h2>
+    </div>
+    <div class="well well-success">
+        {% if tipo == "efectivo" %}
+          <p>Su pago sera en EFECTIVO con {{efectivo}}</p>
+        {% else %}
+          <p>Su pago sera con TARJETA {{ccNumber}}.<br>
+          <strong>Nos pondremos en contacto al finarlizar su compara para realizar el cobro de tarjeta.</strong></p>
+        {% endif %}
+        <!--<p>{% blocktrans with amount=order_total.incl_tax|currency %}<strong>{{ amount }}</strong> will be debited from your bankcard.{% endblocktrans %}</p>-->
+        <div class="alert-actions">
+            <a href="{% url 'checkout:payment-details' %}" class="btn">{% trans "Cambiar Pago" %}</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block hiddenforms %}
+    <input type="hidden" name="tipo" value="{{ tipo }}"/>
+    <input type="hidden" name="efectivo" value="{{ efectivo }}" />
+    <input type="hidden" name="ccName " value="{{ ccName }}" />
+    <input type="hidden" name="ccNumber" value="{{ ccNumber }}" />
+    <input type="hidden" name="ccMonth" value="{{ ccMonth }}" />
+    <input type="hidden" name="ccYear" value="{{ ccYear }}" />
+    <input type="hidden" name="ccCCV" value="{{ ccCCV }}" />
+    {{ bankcard_form.as_p }}
+    {{ billing_address_form.as_p }}
+{% endblock %}

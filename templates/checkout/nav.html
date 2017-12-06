@@ -5,15 +5,25 @@
       <div class="row ">
           <div class="col-xs-12 col-sm-12">
               <ul class="text-center steps">
-                <li class="wow fadeInUp step1  animated" style="visibility: visible; animation-name: fadeInUp;"><a href="#" class="hvr-wobble-top"><span>1</span> Shopping Cart</a></li>
-                <li class="wow fadeInUp step2 current animated" style="visibility: visible; animation-name: fadeInUp;"><a href="#"  class="hvr-wobble-top"><span>2</span> Checkout</a></li>
-                <li class="wow fadeInUp step3 animated" style="visibility: visible; animation-name: fadeInUp;"><a href="#" class="hvr-wobble-top"><span>3</span> Order Complete</a></li>
+                <li class="wow fadeInUp step1  animated" style="visibility: visible; animation-name: fadeInUp;"><a href="#" class="hvr-wobble-top"><span>1</span> Carrito</a></li>
+                {% if step == 1 or step == 2 or step == 3%}
+                  <li class="wow fadeInUp step2 current animated" style="visibility: visible; animation-name: fadeInUp;"><a href="#"  class="hvr-wobble-top"><span>2</span> Pagar</a></li>
+                  <li class="wow fadeInUp step3 animated" style="visibility: visible; animation-name: fadeInUp;"><a href="#" class="hvr-wobble-top"><span>3</span> Terminar</a></li>
+                {% else %}
+                  {% if step == 4 or step == 5 %}
+                    <li class="wow fadeInUp step2 animated" style="visibility: visible; animation-name: fadeInUp;"><a href="#"  class="hvr-wobble-top"><span>2</span> Pagar</a></li>
+                    <li class="wow fadeInUp step3 animated current" style="visibility: visible; animation-name: fadeInUp;"><a href="#" class="hvr-wobble-top"><span>3</span> Terminar</a></li>
+                  {% else %}
+                    <li class="wow fadeInUp step2 animated" style="visibility: visible; animation-name: fadeInUp;"><a href="#"  class="hvr-wobble-top"><span>2</span> Pagar</a></li>
+                    <li class="wow fadeInUp step3 animated" style="visibility: visible; animation-name: fadeInUp;"><a href="#" class="hvr-wobble-top"><span>3</span> Terminar</a></li>
+                  {% endif %}
+                {% endif %}
             </ul>
           </div>
       </div>
     </div>
 </div>
-<div class="navbar navbar-static-top navbar-inverse nav-checkout" style="display:none;">
+<div class="navbar navbar-static-top navbar-inverse nav-checkout" style="display:none">
     <ul class="nav navbar-nav">
         {% spaceless %}
             <li class="step1 {% if step == 1 %}active{% else %}{% if step == 2 %}previous{% else %}{% if step > 1 %}visited{% else %}disabled{% endif %}{% endif %}{% endif %} ">

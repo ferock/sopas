@@ -1,7 +1,7 @@
 {% load currency_filters %}
 {% load i18n %}
 <div class="basket-mini">
-  <span class="btn-group" style="margin-left:-10px;">
+  <span class="btn-group">
     <a href="{% url 'basket:summary' %}" class="btn border-btn-small cart-btn hvr-wobble-horizontal pull-left">
       <i class="fa fa-shopping-cart"></i>
       {{ request.basket.num_lines }} {% trans "Items" %}
@@ -12,7 +12,7 @@
           {{ request.basket.total_excl_tax|currency:request.basket.currency }}
       {% endif %}-->
     </a>
-    <button class="btn btn-default border-btn-small dropdown-toggle pull-right hidden-xs" style="top:10px;padding-bottom: 11px;padding-top: 10px;" data-toggle="dropdown">
+    <button class="btn btn-default border-btn-small dropdown-toggle pull-right hidden-xs hidden-sm hidden-md" style="top:10px;padding-bottom: 11px;padding-top: 10px;" data-toggle="dropdown">
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu pull-right">

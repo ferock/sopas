@@ -1,5 +1,5 @@
 {% extends "layout_2_col.html" %}
-
+{% load compress %}
 {% load basket_tags %}
 {% load promotion_tags %}
 {% load category_tags %}
@@ -15,13 +15,25 @@
 
 
 {% block banner %}
-<section class="banner banner-image menu-page-banner">
+<section class="banner home-banner menu-page-banner">
     <div class="bannerwrap">
-        <figure><img src={% static "images/blog-banner-main.jpg" %} alt="Menu page banner" /></figure>
-        <div class="banner-text text-center">
-            <h1 class="text-uppercase"><strong>OUR DELICIOUS MENU</strong></h1>
-            <p class="text-sp text-lt">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.</p>
-        </div>
+      <div id="owl-demo">
+          <div class="item">
+              <img src="{% static "images/slider 1.jpg" %}" alt="Slider Sopas 1">
+              <div class="container">
+              </div>
+          </div>
+          <div class="item">
+              <img src="{% static "images/slider 2.jpg" %}" alt="Slider Sopas 1">
+              <div class="container">
+              </div>
+          </div>
+          <div class="item">
+              <img src="{% static "images/slider 3.jpg" %}" alt="Slider Sopas 1">
+              <div class="container">
+              </div>
+          </div>
+      </div>
     </div>
 </section>
 {% endblock %}
@@ -57,29 +69,39 @@
         <div class="row">
           {% block column_left  %}
           <div class="col-xs-12 col-sm-3 menu-left-sidebar">
-            <!-- search -->
+            <!-- search
             <div class="search-section menu-sidebox-wrap wow fadeInLeft">
                 <form>
                     <fieldset><input type="text" placeholder="Search something"></fieldset>
                 </form>
             </div>
-            <!--search ends-->
+            search ends-->
             <!--category- list-->
+            {% category_tree as tree_categories %}
+            {% if tree_categories %}
             <div class="menu-sidebox-wrap wow fadeInLeft">
-                <h6 class="title text-sp text-lt">Menu Categories</h6>
-                <ul class="side-cat-list">
-                   <li><a href="#">All Categories</a></li>
-                   <li><a href="#" class="active">Soup & Salads</a></li>
-                   <li><a href="#">Enchiladas</a></li>
-                   <li><a href="#">Fajita Grill</a></li>
-                   <li><a href="#">Fajita Grill</a></li>
-                   <li><a href="#">Border Bowls</a></li>
-                   <li><a href="#">Lunch</a></li>
-                   <li><a href="#">Desserts</a></li>
-                </ul>
+              <h6 class="title text-sp text-lt">{% trans "Menu" %}</h6>
+              <ul class="side-cat-list">
+                  {% for tree_category, info in tree_categories %}
+                      <li>
+                          <a class="{% if tree_category.pk == category.pk %} active{% endif %}" href="{{ tree_category.get_absolute_url }}">
+                              {% if tree_category.pk == category.pk %}
+                                  <strong>{{ tree_category.name }}</strong>
+                              {% else %}
+                                  {{ tree_category.name }}
+                              {% endif %}
+                          </a>
+
+                          {% if info.has_children %}<ul>{% else %}</li>{% endif %}
+                          {% for n in info.num_to_close %}
+                              </ul></li>
+                          {% endfor %}
+                  {% endfor %}
+              </ul>
             </div>
+            {% endif %}
             <!--category list ends-->
-            <!-- calories range -->
+            <!-- calories range
               <div class="menu-sidebox-wrap wow fadeInLeft">
 
                   <h6 class="title text-sp text-lt">Filter by Calories</h6>
@@ -97,8 +119,8 @@
                   </div>
 
               </div>
-            <!-- calories range ends -->
-            <div class="menu-sidebox-wrap seller-list wow fadeInLeft">
+            calories range ends
+            <div class="menu-sidebox-wrap seller-list wow fadeInLeft" style="display:none;">
                 <h6 class="title text-sp text-lt">Best Sellers</h6>
                 <ul>
                     <li>
@@ -130,7 +152,8 @@
                     </li>
                 </ul>
             </div>
-            <!-- Ingredient tags -->
+            -->
+            <!-- Ingredient tags
               <div class="menu-sidebox-wrap ingredient-tags wow fadeInLeft">
                   <h6 class="title text-sp text-lt">Ingredient Tags</h6>
                   <ul>
@@ -144,7 +167,7 @@
                       <li><a href="#" class="hvr-wobble-top"> FRESH-SALMON </a></li>
                   </ul>
               </div>
-            <!-- Ingredient ends -->
+            Ingredient ends -->
           </div>
           {% endblock %}
           {% block content  %}
@@ -158,7 +181,9 @@
             </div>
             {% else %}
             <div class="row menu-listing-wrap list-view">
-              <p class="nonefound">{% trans "No products found." %}</p>
+              <div class="col-xs-12 col-sm-12 menu-item wow fadeInLeft">
+                <p class="nonefound">{% trans "No products found." %}</p>
+              </div>
             </div>
             {% endif %}
             <form method="get" class="form-horizontal">
@@ -196,4 +221,24 @@
         </div>
     </div>
   </section>
+{% endblock %}
+
+{% block morescripts %}
+{% compress js %}
+<script type="text/javascript" src="{% static "js/owl.carousel.js" %}"></script>
+
+<script>
+$(document).ready(function(){
+  $("#owl-demo").owlCarousel({
+  autoPlay: 4000, //Set AutoPlay to 3 seconds
+  transitionStyle: "fade",
+  items: 1,
+  itemsDesktop: [1199, 1],
+  itemsDesktopSmall: [979, 1],
+  itemsMobile: [768, 1]
+
+  });
+});
+</script>
+{% endcompress %}
 {% endblock %}

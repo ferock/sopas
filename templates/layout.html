@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% load promotion_tags %}
+{% load compress %}
 
 {% block styles %}
     {% comment %}
@@ -13,46 +14,38 @@
     {% else %}
         <link rel="stylesheet" type="text/css" href="{% static "oscar/css/styles.css" %}" />
     {% endif %}
-    <link rel="stylesheet" href="{% static "oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "oscar/css/datetimepicker.css" %}" />
-
+    <link href={% static "css/font-awesome.css" %} rel="stylesheet">
     <link rel="stylesheet" type="text/css" href={% static "css/styles.less" %} />
     <link href={% static "css/bootstrap.min.css" %} rel="stylesheet">
-    <link href={% static "css/animate.css" %} rel="stylesheet">
-    <link href={% static "css/hover.css" %} rel="stylesheet">
-    <link href={% static "css/font-awesome.css" %} rel="stylesheet">
-    <link href={% static "css/jquery.bxslider.css" %} rel="stylesheet">
-    <link href={% static "css/owl.carousel.css" %} rel="stylesheet">
-    <link href={% static "css/owl.transitions.css" %} rel="stylesheet">
-    <link href={% static "css/feature-carousel.css" %} rel="stylesheet" >
-    <link href={% static "css/jquery-ui-1.9.2.custom.css" %} rel="stylesheet">
     <link href={% static "css/style.css" %} rel="stylesheet">
+
+
 {% endblock %}
 
 {% block layout %}
     {# Top-horizontal bar with account, notifictions, dashboard links #}
     <!--{% include "partials/nav_accounts.html" %}-->
-    <div class="wrapper">
+    <div class="wrapper" id="content_inner">
     {# Site logo/title, mini-basket, browse dropdown and searchbox #}
 
     <header>
       <div class="container">
         <div class="row">
             <!-- ============== Left logo block starts ============== -->
-            <div class="col-xs-12 col-sm-3 logo-block">
+            <div class="col-xs-6 col-sm-3 logo-block">
               {% include "partials/brand.html" %}
             </div>
             <!-- ============== Left logo block ends ============== -->
 
             <!-- ============== Main navigation starts ============== -->
-            <div class="col-xs-12 col-sm-7 menu-block">
+            <div class="col-xs-12 col-sm-7 hidden-xs menu-block">
               {% block navigation %}
                   {% include "partials/nav_primary.html" %}
               {% endblock %}
 
             </div>
 
-            <div class="col-xs-12 col-sm-2 nav-cart ">
+            <div class="col-xs-6 col-sm-2 nav-cart ">
               {# Mini-basket wrapped in a block so some templates can now display it #}
               {% block mini_basket %}{% include "partials/mini_basket.html" %}{% endblock %}
             </div>
@@ -106,6 +99,7 @@
 {# Local scripts #}
 {% block scripts %}
     {{ block.super }}
+    {% compress js %}
     <!-- Twitter Bootstrap -->
     <script type="text/javascript" src="{% static "oscar/js/bootstrap3/bootstrap.min.js" %}"></script>
     <!-- Oscar -->
@@ -127,12 +121,15 @@
     }
   });
     </script>
+    {% endcompress %}
 {% endblock %}
 
 {% block extrascripts %}
     {% include "partials/extrascripts.html" %}
     {{ block.super }}
 {% endblock %}
+
+{% block morescripts %}{% endblock %}
 
 {% block onbodyload %}
     {{ block.super }}

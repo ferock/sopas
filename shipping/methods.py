@@ -2,15 +2,14 @@ from  oscar.apps.shipping.abstract_models import *
 from oscar.apps.shipping import methods
 from oscar.core import prices
 
-
-class FleteDefault(AbstractOrderAndItemCharges):
-    code = 'flete1'
-    name = 'Flete'
-
-#   def calculate(self,basket):
-#        return prices.Price(currency=basket.currency,
-#            excl_tax=D('10.00'), incl_tax=D('10.00'))
-
 class Free(methods.Free):
-    code='free'
-    name='Free'
+    code = 'self-pickup'
+    name = ('Self pickup')
+
+
+class FleteDefault(methods.FixedPrice):
+    code = 'flete'
+    name = ('Flete')
+
+    charge_excl_tax = D("35.00")
+    charge_incl_tax = D("35.00")

@@ -16,11 +16,10 @@
 {% block shipping_address %}
 <div class="col-sm-12">
     <div class="sub-header">
-        <h2>{% trans "Where should we ship to?" %}</h2>
+        <h2>{% trans "Datos de Envio" %}</h2>
     </div>
     {% if user.is_authenticated %}
         {% if addresses %}
-            <h3>{% trans "An address from your address book?" %}</h3>
             <div class="choose-block">
                 <div class="row">
                     {% for address in addresses %}

@@ -9,20 +9,20 @@
       <div class="container">
         <div class="row">
             <!-- ============== Left logo block starts ============== -->
-            <div class="col-xs-12 col-sm-3 logo-block">
+            <div class="col-xs-6 col-sm-3 logo-block">
               {% include "partials/brand.html" %}
             </div>
             <!-- ============== Left logo block ends ============== -->
 
             <!-- ============== Main navigation starts ============== -->
-            <div class="col-xs-12 col-sm-7 menu-block">
+            <div class="col-xs-12 col-sm-7 menu-block hidden-xs">
               {% block navigation %}
                   {% include "partials/nav_primary.html" %}
               {% endblock %}
 
             </div>
 
-            <div class="col-xs-12 col-sm-2 nav-cart ">
+            <div class="col-xs-6 col-sm-2 nav-cart ">
               {# Mini-basket wrapped in a block so some templates can now display it #}
               {% block mini_basket %}{% include "partials/mini_basket.html" %}{% endblock %}
             </div>
@@ -59,7 +59,7 @@
             <main>
               {% block checkout_nav %}{% endblock %}
               <div class="container">
-                <div class=" block">
+                <div class=" ">
                   {% block content %}{% endblock %}
                 </div>
               </div>
