@@ -59,7 +59,7 @@ jobs:
             export PATH=${PATH}:$HOME/gsutil
       - run:
           command: |
-            echo "/var/secrets/key.json" | $HOME/gsutil/gsutil config -e
+            echo "/var/secrets/key.json"| echo "N" | $HOME/gsutil/gsutil config -e
       - run:
           name: "publicando cambios de estaticos"
           command: "$HOME/gsutil/gsutil rsync -R ./staticos/CACHE gs://bdelivery/static/CACHE"
