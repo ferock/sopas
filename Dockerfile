@@ -4,8 +4,6 @@ RUN virtualenv /env
 
 ENV VIRTUAL_ENV /env
 ENV PATH /env/bin:$PATH
-ADD bdeliveryonline.json /app/bdeliveryonline.json
-ENV GOOGLE_APPLICATION_CREDENTIALS /app/bdeliveryonline.json
 
 RUN apt-get install libmysqlclient-dev
 

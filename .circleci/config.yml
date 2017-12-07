@@ -21,7 +21,7 @@ jobs:
             . env/bin/activate
             pip install -r requirements.txt
       - run:
-          command: apt-get install libmysqlclient-dev
+          command: apt-get install libmysqlclient-dev curl
       - run:
           command: |
             . env/bin/activate
