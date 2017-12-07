@@ -11,7 +11,7 @@ jobs:
         environment:
           MYSQL_DATABASE: "appdb"
           MYSQL_USER: "root"
-          MYSQL_PASSWORD: "apppw"
+          MYSQL_PASSWORD: ""
           MYSQL_ROOT_PASSWORD: ""
     steps:
       - checkout
