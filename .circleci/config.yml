@@ -4,15 +4,15 @@ jobs:
     docker:
       - image: gcr.io/google_appengine/python
         environment:
-          DATABASE_NAME: "test_appdb"
+          DATABASE_NAME: "appdb"
           DATABASE_USER: "appuser"
-          DATABASE_PASSWD: "apppw"
+          DATABASE_PASSWD: ""
       - image: circleci/mysql
         environment:
           MYSQL_DATABASE: "appdb"
           MYSQL_USER: "appuser"
           MYSQL_PASSWORD: "apppw"
-          MYSQL_ROOT_PASSWORD: "apppw"
+          MYSQL_ROOT_PASSWORD: ""
     steps:
       - checkout
       - run:
