@@ -59,7 +59,6 @@ jobs:
             export PATH=${PATH}:$HOME/gsutil
       - run:
           command: |
-            chmod -R 777 /var/secrets/key.json
             echo "/var/secrets/key.json" | $HOME/gsutil/gsutil config -e
       - run:
           name: "publicando cambios de estaticos"
