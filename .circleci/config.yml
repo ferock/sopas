@@ -61,6 +61,7 @@ jobs:
           command: |
             echo "/var/secrets/key.json
             N
+            bdeliveryonline
             "| $HOME/gsutil/gsutil config -e
       - run:
           name: "publicando cambios de estaticos"
