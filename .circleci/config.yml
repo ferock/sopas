@@ -58,7 +58,7 @@ jobs:
             tar -zxf /tmp/gsutil.tar.gz -C $HOME
             export PATH=${PATH}:$HOME/gsutil
       - run:
-          command: $HOME/gsutil/gsutil config -e
+          command: /var/secrets/key.json | $HOME/gsutil/gsutil config -e 
       - run:
           name: "publicando cambios de estaticos"
           command: "$HOME/gsutil/gsutil rsync -R ./staticos/CACHE gs://bdelivery/static/CACHE"
