@@ -5,12 +5,12 @@ jobs:
       - image: gcr.io/google_appengine/python
         environment:
           DATABASE_NAME: "appdb"
-          DATABASE_USER: "appuser"
+          DATABASE_USER: "root"
           DATABASE_PASSWD: ""
       - image: circleci/mysql
         environment:
           MYSQL_DATABASE: "appdb"
-          MYSQL_USER: "appuser"
+          MYSQL_USER: "root"
           MYSQL_PASSWORD: "apppw"
           MYSQL_ROOT_PASSWORD: ""
     steps:
