@@ -9,7 +9,7 @@ jobs:
           DATABASE_PASSWD: "apppw"
       - image: circleci/mysql
         environment:
-          MYSQL_DATABASE: "test_appdb"
+          MYSQL_DATABASE: "appdb"
           MYSQL_USER: "appuser"
           MYSQL_PASSWORD: "apppw"
           MYSQL_ROOT_PASSWORD: "apppw"
