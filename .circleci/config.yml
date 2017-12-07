@@ -66,6 +66,9 @@ jobs:
       - run:
           name: "publicando cambios de estaticos"
           command: "$HOME/gsutil/gsutil rsync -R ./staticos/CACHE gs://bdelivery/static/CACHE"
+      - run:
+          name: "publicando Imagenes"
+          command: "$HOME/gsutil/gsutil rsync -R ./staticos/images gs://bdelivery/static/images"
 
       - setup_remote_docker
 

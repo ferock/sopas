@@ -11,7 +11,8 @@
 {% endblock title %}
 
 {% block checkout_nav %}
-    {% include 'checkout/nav.html' with step=5 %}
+    {# include 'checkout/nav.html' with step=5 #}
+    <br>
 {% endblock %}
 
 {% block checkout_title %}
@@ -21,6 +22,9 @@
 {% endblock %}
 
 {% block content %}
+    <div style="text-align:center">
+      <img class="img-thumbnail img-responsive center-block" src="{% static "images/thanks.jpeg" %}">
+    </div>
     <p class="lead">
         {% blocktrans with number=order.number %}
         Your order has been placed and a confirmation email has been sent - your order number is
@@ -28,7 +32,7 @@
         {% endblocktrans %}
         {% trans "Please make a note of this reference or print this page and quote it in any communication with us regarding your order." %}</p>
     </p>
-
+    <!--
     <div class="row shipping-payment">
         <div class="col-sm-6">
             {% block shipping_info %}
@@ -120,9 +124,9 @@
             <p class="col-sm-2 h4 align-right">{% trans "Total" %}</p>
         </div>
     </div>
-
-    {% for line in order.lines.all %}
-        <div class="basket-items">
+  -->
+    {# for line in order.lines.all #}
+        <!--<div class="basket-items">
             <div class="row">
                 <div class="col-sm-2">
                     <div class="image_container">
@@ -157,11 +161,11 @@
                     </p>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        </div>-->
+    {# endfor #}
 
-    {% block basket_totals %}
-        <div class="row">
+    {# block basket_totals #}
+        <!--<div class="row">
             <div class="col-sm-6">&nbsp;</div>
             <div class="col-sm-6">
                 <div class="sub-header">
@@ -294,15 +298,16 @@
                 </div>
             </div>
         </div>
-    {% endblock basket_totals %}
+      -->
+    {# endblock basket_totals #}
 
     {% block order_tracking %}
         {% if not order.user %}
-            <div class="sub-header">
+            <!-- <div class="sub-header">
                 <h2>{% trans "Tracking your order" %}</h2>
             </div>
             <p>{% trans "You can track the status of your order" %}</p>
-            <a class="btn btn-primary" href="{% url 'customer:anon-order' order_number=order.number hash=order.verification_hash %}">{% trans "View order status" %}</a>.
+            <a class="btn btn-primary" href="{% url 'customer:anon-order' order_number=order.number hash=order.verification_hash %}">{% trans "View order status" %}</a>.-->
         {% endif %}
     {% endblock %}
 
@@ -310,9 +315,9 @@
     {% block order_actions %}
         <div class="form-group">
             <div class="row">
-                <div class="col-sm-4">
+                <!--<div class="col-sm-4">
                     <p><a onclick="window.print()" href="#" class="btn btn-primary btn-block btn-lg">{% trans "Print this page" %}</a></p>
-                </div>
+                </div>-->
                 <div class="col-sm-4 col-sm-offset-4">
                     <p><a href="{{ homepage_url }}" class="btn btn-primary btn-block btn-lg">{% trans "Continue shopping" %}</a></p>
                 </div>
