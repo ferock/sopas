@@ -34,7 +34,7 @@ jobs:
           command: |
             set -x
             VER="17.09.0-ce"
-            wget https://download.docker.com/linux/static/stable/x86_64/ -O /tmp/docker-$VER.tgz
+            wget https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz -O /tmp/docker-$VER.tgz
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
             mv /tmp/docker/* /usr/bin
 
