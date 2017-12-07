@@ -7,6 +7,7 @@ jobs:
           DATABASE_NAME: "appdb"
           DATABASE_USER: "root"
           DATABASE_PASSWD: ""
+          GOOGLE_APPLICATION_CREDENTIALS: /var/secrets/key.json
       - image: circleci/mysql
         environment:
           MYSQL_DATABASE: "appdb"
@@ -14,6 +15,15 @@ jobs:
           MYSQL_PASSWORD: ""
     steps:
       - checkout
+
+      - run:
+          name: "Seteando GOOGLE ACCOUNT SERVICE json"
+          command: echo $GoogleAccountServiceJSON > /var/secrets/key.json
+
+      - run:
+          name: "probando si se grabo archivo"
+          command: cat /var/secrets/key.json
+
       - run:
           name: "Instalando Virtualenv y Requerimientos"
           command: |
@@ -32,11 +42,25 @@ jobs:
           name: "Generando Estaticos"
           command: |
             . env/bin/activate
+            python manage.py collectstatic --noinput
             python manage.py compress
       - run:
           name: "Contenido de estaticos"
           command: ls -la ./staticos
-          
+
+      - run:
+          name: "instalando GSUTIL para publicar archivos comprimidos"
+          command: |
+            set -x
+            wget https://storage.googleapis.com/pub/gsutil.tar.gz -O /tmp/gsutil.tar.gz
+            tar -zxf /tmp/gsutil.tar.gz -C $HOME
+            export PATH=${PATH}:$HOME/gsutil
+      - run:
+          command: gsutil --help
+      - run:
+          name: "publicando cambios de estaticos"
+          command:
+
       - setup_remote_docker
 
       - run:
