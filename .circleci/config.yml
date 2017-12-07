@@ -58,10 +58,10 @@ jobs:
             tar -zxf /tmp/gsutil.tar.gz -C $HOME
             export PATH=${PATH}:$HOME/gsutil
       - run:
-          command: $HOME/gsutil --help
+          command: $HOME/gsutil/gsutil --help
       - run:
           name: "publicando cambios de estaticos"
-          command: "$HOME/gsutil rsync -R staticos/CACHE gs://bdelivery/static/CACHE"
+          command: "$HOME/gsutil/gsutil rsync -R staticos/CACHE gs://bdelivery/static/CACHE"
 
       - setup_remote_docker
 
