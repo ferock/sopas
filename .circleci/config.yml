@@ -21,17 +21,18 @@ jobs:
           command: |
               mkdir /var/secrets
               echo $GoogleAccountServiceJSON > /var/secrets/key.json
-
-      - run:
-          name: "probando si se grabo archivo"
-          command: cat /var/secrets/key.json
-
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run:
           name: "Instalando Virtualenv y Requerimientos"
           command: |
             virtualenv env
             . env/bin/activate
             pip install -r requirements.txt
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "env"
       - run:
           name: "Instalando Cliente MySql"
           command: apt-get install libmysqlclient-dev
