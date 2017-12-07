@@ -59,7 +59,7 @@ jobs:
             export PATH=${PATH}:$HOME/gsutil
       - run:
           command: |
-            echo "/var/secrets/key.json 
+            echo "/var/secrets/key.json
             N
             "| $HOME/gsutil/gsutil config -e
       - run:
