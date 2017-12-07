@@ -55,9 +55,29 @@
               <form method="post" action="{% url 'checkout:preview' %}" enctype="application/x-www-form-urlencoded" class="form-stacked">
                   {% csrf_token %}
                     <input type="hidden" name="tipo" value="efectivo">
+                    <fieldset style="display:none">
+                        <label></label>
+                        <input type="text" name="" />
+                    </fieldset>
+                    <fieldset style="display:none">
+                        <label></label>
+                        <input type="text" name="" />
+                    </fieldset>
                     <fieldset>
-                        <p>Con cuanto pagaras?</p>
+                      <label>Total a Pagar: </label>
+                      <input type="text" name="totalapagar" readonly value="{{basket.total_incl_tax}}" />
+                    </fieldset>
+                    <fieldset>
+                        <label>Con cuanto pagaras?</label>
                         <input type="text" name="efectivo" placeholder="500.00" />
+                    </fieldset>
+                    <fieldset style="display:none">
+                        <label></label>
+                        <input type="text" name="" placeholder="0000-0000-0000-0000"/>
+                    </fieldset>
+                    <fieldset style="display:none">
+                        <label></label>
+                        <input type="text" name="" placeholder="0000-0000-0000-0000"/>
                     </fieldset>
                     <div class="clear"></div>
                     <fieldset>

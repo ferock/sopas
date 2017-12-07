@@ -19,7 +19,7 @@
     {% endblock %}
     <div class="mid">
         <h4><a href="#">{{ product.get_title }}</a></h4>
-        <span>desc</span>
+        <span>{{product}}</span>
         <div class="facts-table">
           {% block product_review %}
               {% iffeature "reviews" %}

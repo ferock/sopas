@@ -3,7 +3,7 @@ from oscar.apps.payment import models
 from oscar.apps.payment.forms import BankcardForm
 from oscar.apps.payment.exceptions import RedirectRequired
 from paybac import  facade
-
+from oscar.core import prices
 
 class PaymentDetailsView(views.PaymentDetailsView):
 
@@ -37,13 +37,18 @@ class PaymentDetailsView(views.PaymentDetailsView):
         return self.submit(**sub)
 
     def handle_payment_details_submission(self, request):
-        return self.render_preview(request,**request.POST)
+        if request.POST.get("tipo") == "efectivo":
+            if float(request.basket.total_incl_tax) <= float(request.POST.get("efectivo")):
+                return self.render_preview(request,**request.POST)
+            else:
+                return self.render_payment_details(request, **{"error": "El monto no puede ser menor al total a pagar!"})
+        else:
+            return self.render_preview(request,**request.POST)
 
     def handle_payment(self, order_number, total, **kwargs):
         payment = kwargs
         if(payment.get("tipo")[0] == "efectivo"):
             reference="pagoEfectivo"
-            print(float(payment.get("efectivo")[0]))
             source_type, __ = models.SourceType.objects.get_or_create(
                 name="PagoEfectivo")
             source = models.Source(
