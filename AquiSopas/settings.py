@@ -126,7 +126,7 @@ if not os.getenv('HAS_DB'):
             'NAME': os.getenv('DATABASE_NAME','appdb'),
             'USER': os.getenv('DATABASE_USER','root'),
             'PASSWORD': os.getenv('DATABASE_PASSWD',''),
-            'HOST': os.getenv('MYSQL_SERVICE_HOST','localhost'),
+            'HOST': os.getenv('MYSQL_SERVICE_HOST','127.0.0.1'),
             'PORT': os.getenv('MYSQL_SERVICE_PORT','3306')
         }
     }
