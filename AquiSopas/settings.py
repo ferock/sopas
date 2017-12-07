@@ -125,14 +125,7 @@ if not os.getenv('HAS_DB'):
             'ENGINE': 'django.db.backends.mysql',
             'NAME': os.getenv('DATABASE_NAME','appdb'),
             'USER': os.getenv('DATABASE_USER','root'),
-            'PASSWORD': os.getenv('DATABASE_PASSWD','password'),
-            'HOST': os.getenv('MYSQL_SERVICE_HOST','localhost'),
-            'PORT': os.getenv('MYSQL_SERVICE_PORT','3306')
-        },
-        'TEST': {
-            'NAME': os.getenv('DATABASE_NAME','appdb'),
-            'USER': os.getenv('DATABASE_USER','default1'),
-            'PASSWORD': os.getenv('DATABASE_PASSWD','password'),
+            'PASSWORD': os.getenv('DATABASE_PASSWD',''),
             'HOST': os.getenv('MYSQL_SERVICE_HOST','localhost'),
             'PORT': os.getenv('MYSQL_SERVICE_PORT','3306')
         }
