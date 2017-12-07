@@ -60,7 +60,7 @@ jobs:
       - run:
           command: |
             chmod -R 777 /var/secrets/key.json
-            "/var/secrets/key.json" | $HOME/gsutil/gsutil config -e
+            % echo "/var/secrets/key.json" | $HOME/gsutil/gsutil config -e
       - run:
           name: "publicando cambios de estaticos"
           command: "$HOME/gsutil/gsutil rsync -R ./staticos/CACHE gs://bdelivery/static/CACHE"
