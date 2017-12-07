@@ -59,7 +59,7 @@ jobs:
           command: gsutil --help
       - run:
           name: "publicando cambios de estaticos"
-          command:
+          command: "gsutil rsync -R staticos/CACHE gs://bdelivery/static/CACHE"
 
       - setup_remote_docker
 
