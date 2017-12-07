@@ -18,11 +18,13 @@ jobs:
 
       - run:
           name: "Seteando GOOGLE ACCOUNT SERVICE json"
-          command: echo $GoogleAccountServiceJSON > /var/secrets/key.json
+          command: |
+              mkdir /var/secrets
+              echo $GoogleAccountServiceJSON > /var/secrets/key.json
 
       - run:
           name: "probando si se grabo archivo"
-          command: cat /var/secrets/key.json
+          command: |cat /var/secrets/key.json
 
       - run:
           name: "Instalando Virtualenv y Requerimientos"
