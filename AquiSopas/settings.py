@@ -221,7 +221,7 @@ OSCAR_GOOGLE_ANALYTICS_ID = "UA-110543293-1"
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 
 ANYMAIL = {
-    "MAILGUN_API_KEY": "key-2627cb8e57c0efb4f85eaa918870517d",
+    "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY", "api"),
     "MAILGUN_SENDER_DOMAIN": 'sac.aquisopas.com',  # your Mailgun domain, if needed
 }
 

@@ -44,7 +44,7 @@
                     {% purchase_info_for_line request line as session %}
                     <div class="basket-items">
                         <div class="row">
-                            <div class="col-sm-2">
+                            <div class="col-sm-2 col-xs-4">
                                 {{ form.id }}
                                 {% with image=product.primary_image %}
                                     {% thumbnail image.original "100x100" upscale=False as thumb %}
@@ -54,16 +54,17 @@
                                     {% endthumbnail %}
                                 {% endwith %}
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3 col-xs-4">
                                 <h3><a href="{{ product.get_absolute_url }}">{{ line.description }}</a></h3>
-                                <p class="availability {{ session.availability.code }}">{{ session.availability.message }}</p>
+                                <!--<p class="availability {{ session.availability.code }}">{{ session.availability.message }}</p>-->
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3 col-xs-4">
                                 <div class="checkout-quantity">
                                     <div class="input-group  {% if form.errors %}error{% endif %}">
-                                        {% render_field form.quantity class+="form-control" %}
-                                      <span class="input-group-btn">
-                                          <button class="btn btn-primary" type="submit" data-loading-text="{% trans 'Updating...' %}">{% trans "Update" %}</button>
+                                        {% render_field form.quantity class+="form-control" style="min-width:44px;font-size:1.5em;" %}
+                                      <span class="input-group-btn" style="min-width:auto;">
+                                          <button class="btn btn-primary hidden-xs hidden-sm" type="submit" data-loading-text="{% trans 'Updating...' %}">{% trans "Update" %}</button>
+                                          <button class="btn btn-primary hidden-lg hidden-md" type="submit" data-loading-text="{% trans '...' %}">{% trans "Ok" %}</button>
                                       </span>
                                     </div>
                                 </div>
@@ -85,7 +86,7 @@
                                     </div>
 
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-2 col-xs-3 hidden-lg">
                                 {% if not line.unit_price_incl_tax and not line.unit_tax_excl_tax %}
                                     <p class="align-right">&mdash;</p>
                                 {% else %}
@@ -98,7 +99,33 @@
                                     </p>
                                 {% endif %}
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-2 col-xs-3 hidden-lg">
+                                {% if not line.line_price_incl_tax and not line_price_excl_tax %}
+                                    <p class="align-right">&mdash;</p>
+                                {% else %}
+                                    <p class="price_color align-right" style="color:black">
+                                        {% if line.is_tax_known %}
+                                            {{ line.line_price_incl_tax|currency:line.price_currency }}
+                                        {% else %}
+                                            {{ line.line_price_excl_tax|currency:line.price_currency }}
+                                        {% endif %}
+                                    </p>
+                                {% endif %}
+                            </div>
+                            <div class="col-sm-2 col-xs-3 hidden-xs hidden-sm hidden-md" >
+                                {% if not line.unit_price_incl_tax and not line.unit_tax_excl_tax %}
+                                    <p class="align-right">&mdash;</p>
+                                {% else %}
+                                    <p class="price_color align-right" style="">
+                                        {% if line.is_tax_known %}
+                                            {{ line.unit_price_incl_tax|currency:line.price_currency }}
+                                        {% else %}
+                                            {{ line.unit_price_excl_tax|currency:line.price_currency }}
+                                        {% endif %}
+                                    </p>
+                                {% endif %}
+                            </div>
+                            <div class="col-sm-2 col-xs-3 hidden-xs hidden-sm hidden-md">
                                 {% if not line.line_price_incl_tax and not line_price_excl_tax %}
                                     <p class="align-right">&mdash;</p>
                                 {% else %}
@@ -118,7 +145,7 @@
         </form>
     {% endblock %}
 
-    <div class="row">
+    <div class="ro">
         {% block vouchers %}
             {# Hide the entire section if a custom BasketView doesn't pass in a voucher form #}
             {% if voucher_form %}

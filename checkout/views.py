@@ -38,7 +38,7 @@ class PaymentDetailsView(views.PaymentDetailsView):
 
     def handle_payment_details_submission(self, request):
         if request.POST.get("tipo") == "efectivo":
-            if float(request.basket.total_incl_tax) <= float(request.POST.get("efectivo")):
+            if float(request.basket.total_incl_tax) <= float(request.POST.get("efectivo",0)):
                 return self.render_preview(request,**request.POST)
             else:
                 return self.render_payment_details(request, **{"error": "El monto no puede ser menor al total a pagar!"})
