@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'anymail',
     'compressor'
 ]
-INSTALLED_APPS = INSTALLED_APPS + get_core_apps(['shipping','checkout'])
+INSTALLED_APPS = INSTALLED_APPS + get_core_apps(['shipping','checkout','catalogue','dashboard.catalogue'])
 
 OSCAR_ALLOW_ANON_CHECKOUT = True
 

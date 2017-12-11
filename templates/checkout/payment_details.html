@@ -55,10 +55,10 @@
               <form method="post" action="{% url 'checkout:preview' %}" enctype="application/x-www-form-urlencoded" class="form-stacked">
                   {% csrf_token %}
                     <input type="hidden" name="tipo" value="efectivo">
-                    <p style="#60ba62 !importantfont-size:1.4em;font-weight:bolder;color:black;">TOTAL {{order_total.incl_tax}}</p>
+                    <p style="color:#60ba62 !important;font-size:1.4em;font-weight:bolder;color:black;">TOTAL {{order_total.incl_tax}}</p>
                     <fieldset>
                         <label style="font-size:19px">Con cuanto pagaras?</label>
-                        <input type="text" name="efectivo" placeholder="Ej. 500.00" style="font-size:20px" />
+                        <input type="text" required name="efectivo" placeholder="Ej. 500.00" style="font-size:20px" />
                     </fieldset>
                     <fieldset style="display:none">
                         <label></label>

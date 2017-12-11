@@ -2,3 +2,4 @@
 /cache/
 *__pycache*
 *.pyc
+.DS_Store
