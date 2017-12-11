@@ -73,6 +73,7 @@ STATICFILES_FINDERS = (
 STATIC_ROOT = os.path.join(BASE_DIR,'staticos')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'template_statics'),
+    os.path.join(BASE_DIR,'static')
 )
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
