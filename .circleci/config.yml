@@ -70,7 +70,11 @@ jobs:
       - run:
           name: "publicando Imagenes"
           command: "$HOME/gsutil/gsutil rsync -R ./staticos/images gs://bdelivery/static/images"
-
+      - run:
+          name: "cambiando cache"
+          command: |
+              $HOME/gsutil/gsutil -m setmeta -r -h "Cache-Control:public, max-age=432000" gs://bdelivery/static/images/
+              $HOME/gsutil/gsutil -m setmeta -r -h "Cache-Control:public, max-age=432000" gs://bdelivery/static/CACHE/
       - setup_remote_docker
 
       - run:
