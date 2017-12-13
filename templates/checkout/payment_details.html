@@ -86,6 +86,7 @@
             <div role="tabpanel" class="tab-pane fade in payment-form" id="tarjeta">
               <form method="post" enctype="application/x-www-form-urlencoded" action="{% url 'checkout:preview' %}" class="form-stacked">
                   {% csrf_token %}
+                  <input type="hidden" name="action" value="place_order">
                     <input type="hidden" name="tipo" value="tarjeta">
                     <p style="font-size:1.4em;font-weight:bolder;color:black;">Nosotros te llamaremos para confirmar tu pago con tarjeta.</p>
                     <fieldset style="display:none">
