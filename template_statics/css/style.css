@@ -1680,7 +1680,7 @@ header.green {background: #60ba62;}
   .home-banner a.btn {font-size: 13px;padding: 5px 6.5%;}
   .home-banner {height: auto;}
   .home-banner .bannerwrap figure img {width: 100%;position: relative;right: 0%;left: inherit;}
-  .home-banner, .home-banner .bannerwrap figure, .menu-single-banner, .newsletter-inner {position: relative;}
+  .home-banner, .home-banner .bannerwrap figure, .menu-single-banner, .newsletter-inner {position: relative;margin-top:-30px;}
   .home-banner .banner-text {top: initial;bottom: 0;z-index: 1;}
   .block.select-program-block, .testimonials-block {background-size: cover;}
   .home-banner .bannerwrap figure:before {position: absolute;content: "";width: 100%;height: 100%;background: rgba(0,0,0,.1);z-index: 1;}

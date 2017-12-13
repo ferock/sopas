@@ -14,7 +14,6 @@ class ShippingAddressForm(ShippingAddressForm):
 
     class Meta(ShippingAddressForm.Meta):
         fields = [
-            'first_name','line1', 'line2', 'line4',
-            'state','country',
+            'first_name','line1', 'line2', 'line4','country',
             'phone_number', 'notes',
         ]

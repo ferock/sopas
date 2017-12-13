@@ -13,6 +13,9 @@
 
 {% block body_class %}menu-page{% endblock %}
 
+{% block messages %}
+    {% include "partials/alert_messages.html" %}
+{% endblock %}
 
 {% block banner %}
 <section class="banner home-banner menu-page-banner">
@@ -80,7 +83,7 @@
             {% category_tree as tree_categories %}
             {% if tree_categories %}
             <div class="menu-sidebox-wrap wow fadeInLeft">
-              <h6 class="title text-sp text-lt">{% trans "Menu" %}</h6>
+              <h6 class="title text-sp text-lt hidden-xs">{% trans "Menu" %}</h6>
               <ul class="side-cat-list">
                   {% for tree_category, info in tree_categories %}
                       <li>

@@ -218,6 +218,16 @@ OSCAR_HIDDEN_FEATURES = [
 
 OSCAR_GOOGLE_ANALYTICS_ID = "UA-110543293-1"
 
+OSCAR_INITIAL_ORDER_STATUS = 'Recibido'
+OSCAR_INITIAL_LINE_STATUS = 'Recibido'
+OSCAR_ORDER_STATUS_PIPELINE = {
+    'Recibido': ('Verificado', 'Cancelado',),
+    'Verificado': ('Asignado', 'Cancelado',),
+    'Asignado': ('Entregado', ),
+    'Entregado': ('Cancelado', ),
+    'Cancelado': (),
+}
+
 # EMAIL CONFIGURATION
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 

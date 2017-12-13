@@ -6,6 +6,10 @@
     {% trans "Basket" %} | {{ block.super }}
 {% endblock %}
 
+{% block messages %}
+{% include "partials/alert_messages.html" %}
+{% endblock %}
+
 {% block breadcrumbs %}
     <ul class="breadcrumb">
         <li>

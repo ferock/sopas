@@ -54,6 +54,7 @@
             <div role="tabpanel" class="tab-pane fade in active payment-form" id="efectivo">
               <form method="post" action="{% url 'checkout:preview' %}" enctype="application/x-www-form-urlencoded" class="form-stacked">
                   {% csrf_token %}
+                    <input type="hidden" name="action" value="place_order">
                     <input type="hidden" name="tipo" value="efectivo">
                     <p style="color:#60ba62 !important;font-size:1.4em;font-weight:bolder;color:black;">TOTAL {{order_total.incl_tax}}</p>
                     <fieldset>

@@ -6,7 +6,7 @@
   <main>
     <section class="block menu-page-block">
       <div class="container">
-        {% include "partials/alert_messages.html" %}
+        {% block messages %}{% endblock %}
         {% block toolbar %}{% endblock %}
         {% block column_left  %}{% endblock %}
         {% block content %}{% endblock %}
