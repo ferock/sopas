@@ -197,6 +197,10 @@
         {{ block.super }}
         oscar.dashboard.orders.initTable();
         oscar.dashboard.search.init();
+        function timedRefresh(timeoutPeriod) {
+        	setTimeout("location.reload(true);",timeoutPeriod);
+        }
+        window.onload = timedRefresh(30000);
         {% if form.errors %}
         $('#SearchModal').modal('show');
         {% endif %}

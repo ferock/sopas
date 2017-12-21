@@ -179,7 +179,7 @@ HAYSTACK_CONNECTIONS = {
 
 LANGUAGE_CODE = 'es_MX'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Tegucigalpa'
 
 USE_I18N = True
 
