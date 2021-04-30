@@ -45,7 +45,7 @@ pytz==2017.3
 rcssmin==1.0.6
 requests==2.18.4
 rjsmin==1.0.12
-rsa==3.4.2
+rsa==4.7
 six==1.11.0
 sorl-thumbnail==12.4a1
 text-unidecode==1.0
