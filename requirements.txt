@@ -50,5 +50,5 @@ six==1.11.0
 sorl-thumbnail==12.4a1
 text-unidecode==1.0
 Unidecode==0.4.21
-urllib3==1.22
+urllib3==1.26.5
 mysql-python==1.2.5
